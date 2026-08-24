@@ -1,6 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    /* ARDE STORE - Pantalla inicial */
+    #arde-welcome {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #050505;
+        padding: 20px;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    #arde-welcome.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .arde-welcome-content {
+        width: 100%;
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .arde-banner {
+        display: block;
+        width: 100%;
+        max-width: 850px;
+        height: auto;
+        margin: 0 auto 30px;
+        border-radius: 18px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .arde-title {
+        margin: 0;
+        color: #fff;
+        font-size: clamp(30px, 6vw, 55px);
+        font-weight: 800;
+        letter-spacing: 3px;
+    }
+
+    .arde-subtitle {
+        margin: 8px 0 30px;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: clamp(18px, 3vw, 26px);
+        letter-spacing: 2px;
+    }
+
+    #arde-continue {
+        padding: 15px 55px;
+        border: none;
+        border-radius: 12px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    #arde-continue:hover {
+        background: #3b82f6;
+        transform: scale(1.05);
+    }
+
+    #arde-continue:active {
+        transform: scale(0.97);
+    }
+</style>    
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -40,6 +116,28 @@
 </head>
 
 <body class="bg-gray-900 text-white">
+
+<!-- ARDE STORE - Welcome Screen -->
+<div id="arde-welcome">
+    <div class="arde-welcome-content">
+
+        <img
+            src="arde-store.png"
+            alt="Arde Computer Store"
+            class="arde-banner"
+        >
+
+        <h1 class="arde-title">ARDE STORE</h1>
+
+        <p class="arde-subtitle">PS4 HOST</p>
+
+        <button id="arde-continue" type="button">
+            CONTINUAR
+        </button>
+
+    </div>
+</div>
+    
     <main class="mainContainer">
         <section id="initial-screen" class="relative flex flex-col items-center justify-center min-h-screen p-6 transition-opacity duration-700
             opacity-100">
@@ -685,6 +783,26 @@
     <script src="./includes/js/events.js"></script>
     <script src="./includes/js/payloadsHandler.js"></script>
     <script src="./includes/js/utilities.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const welcome = document.getElementById('arde-welcome');
+        const continueButton = document.getElementById('arde-continue');
+
+        if (!welcome || !continueButton) return;
+
+        continueButton.addEventListener('click', function () {
+
+            welcome.classList.add('hide');
+
+            setTimeout(function () {
+                welcome.remove();
+            }, 700);
+
+        });
+
+    });
+</script>
 </body>
 
 </html>
