@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Arde Store PS4 - Catálogo de juegos">
+<title>Arde Store PS4 - Juegos</title>
+
+<style>
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 50% 0%,#174b82 0%,#0b223e 28%,#06101d 65%,#03070d 100%);
+}
+
+.page{
+    width:100%;
+    min-height:100vh;
+    padding:18px 12px 35px;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+}
+
+header{
+    text-align:center;
+    padding:5px 10px 18px;
+}
+
+.logo{
+    font-size:39px;
+    font-weight:bold;
+    letter-spacing:5px;
+    text-shadow:0 0 7px #1685ff,0 0 16px #1685ff,0 0 30px rgba(22,133,255,.5);
+}
+
+.subtitle{
+    margin-top:5px;
+    font-size:14px;
+    letter-spacing:5px;
+    color:#a9d2ff;
+}
+
+.header-line{
+    width:78%;
+    height:2px;
+    margin:18px auto 0;
+    background:#2587ff;
+    box-shadow:0 0 8px #2587ff,0 0 18px rgba(37,135,255,.5);
+}
+
+.panel{
+    background:linear-gradient(180deg,rgba(3,15,29,.97),rgba(2,10,20,.97));
+    border:1px solid #205f99;
+    border-radius:5px;
+    padding:25px 22px;
+    box-shadow:0 0 25px rgba(0,90,180,.18),inset 0 0 30px rgba(0,70,130,.08);
+}
+
+.title{
+    margin:0;
+    text-align:center;
+    color:#62adff;
+    font-size:27px;
+    text-shadow:0 0 8px rgba(60,150,255,.45);
+}
+
+.description{
+    max-width:800px;
+    margin:9px auto 20px;
+    text-align:center;
+    color:#a8bfd5;
+    line-height:1.5;
+    font-size:13px;
+}
+
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    margin:20px auto;
+}
+
+.search{
+    width:min(620px,100%);
+    padding:13px 15px;
+    border:1px solid #2b70aa;
+    border-radius:5px;
+    background:#07192c;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+}
+
+.search:focus{
+    border-color:#69b5ff;
+    box-shadow:0 0 10px rgba(37,135,255,.35);
+}
+
+.counter{
+    color:#9fc5e7;
+    font-size:12px;
+    text-align:center;
+    margin:8px 0 18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+    gap:15px;
+}
+
+.game{
+    overflow:hidden;
+    background:linear-gradient(145deg,#0a2138,#061323);
+    border:1px solid #225985;
+    border-radius:5px;
+    box-shadow:0 0 10px rgba(0,70,130,.12);
+    transition:transform .15s,border-color .15s,box-shadow .15s;
+}
+
+.game:hover{
+    transform:translateY(-2px);
+    border-color:#4d9ff2;
+    box-shadow:0 0 16px rgba(37,135,255,.25);
+}
+
+.cover{
+    width:100%;
+    aspect-ratio:3/4;
+    display:block;
+    object-fit:cover;
+    background:#07192c;
+}
+
+.game-body{
+    padding:12px;
+}
+
+.game-title{
+    margin:0 0 10px;
+    min-height:36px;
+    color:#fff;
+    font-size:14px;
+    line-height:1.3;
+}
+
+.buttons{
+    display:flex;
+}
+
+.button{
+    width:100%;
+    padding:9px 5px;
+    border:1px solid #2d6c9c;
+    border-radius:3px;
+    background:#103657;
+    color:#fff;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.button:hover{
+    background:#175f91;
+}
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin:25px auto 5px;
+    flex-wrap:wrap;
+}
+
+.page-button{
+    min-width:42px;
+    padding:9px 12px;
+    border:1px solid #2b70aa;
+    border-radius:4px;
+    background:#091d32;
+    color:#fff;
+    cursor:pointer;
+}
+
+.page-button:hover,
+.page-button.active{
+    background:#1769b9;
+    border-color:#69b5ff;
+}
+
+.page-button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.back{
+    display:block;
+    width:max-content;
+    margin:20px auto 0;
+    padding:10px 22px;
+    border:1px solid #2a638f;
+    border-radius:4px;
+    background:#091d32;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.back:hover{
+    background:#124d7d;
+}
+
+.loading,
+.error,
+.empty{
+    padding:25px;
+    text-align:center;
+    color:#a9c9e7;
+    border:1px solid #20517a;
+    background:#07192b;
+    border-radius:4px;
+}
+
+footer{
+    text-align:center;
+    margin-top:19px;
+    padding-top:14px;
+    border-top:1px solid #183c5c;
+    color:#627d97;
+    font-size:10px;
+    line-height:1.7;
+}
+
+footer strong{color:#4d9ff2}
+
+@media(max-width:650px){
+    .page{padding:12px 8px 25px}
+    .logo{font-size:29px;letter-spacing:3px}
+    .subtitle{font-size:11px;letter-spacing:3px}
+    .header-line{width:90%}
+    .panel{padding:20px 12px}
+    .title{font-size:22px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .game-title{font-size:12px}
+    .button{font-size:9px}
+}
+
+@media(max-width:380px){
+    .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+<div class="container">
+
+<header>
+    <div class="logo">ARDE STORE</div>
+    <div class="subtitle">PLAYSTATION 4</div>
+    <div class="header-line"></div>
+</header>
+
+<main class="panel">
+    <h1 class="title">JUEGOS PS4</h1>
+
+    <p class="description">
+        Catálogo de juegos para PlayStation 4.
+        Busca por nombre y abre el gameplay directamente.
+    </p>
+
+    <div class="toolbar">
+        <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="&#128269; Buscar juego..."
+            autocomplete="off">
+    </div>
+
+    <div id="counter" class="counter">
+        Cargando catálogo...
+    </div>
+
+    <div id="catalog">
+        <div class="loading">Cargando juegos...</div>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+
+    <a class="back" href="../index.html">
+        &#8592; VOLVER A ARDE STORE
+    </a>
+</main>
+
+<footer>
+    <strong>ARDE STORE</strong>
+    • PLAYSTATION 4
+    <br>
+    Catálogo de juegos PS4
+</footer>
+
+</div>
+</div>
+
+<script>
+"use strict";
+
+const JSON_URL = "juegos.json?v=1";
+const PAGE_SIZE = 25;
+
+let juegos = [];
+let filtrados = [];
+let paginaActual = 1;
+
+const search = document.getElementById("search");
+const catalog = document.getElementById("catalog");
+const counter = document.getElementById("counter");
+const pagination = document.getElementById("pagination");
+
+function escapar(texto){
+    return String(texto ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function imagenFallback(){
+    return "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800">
+                <rect width="100%" height="100%" fill="#07192c"/>
+                <text x="50%" y="48%" fill="#62adff" font-size="32"
+                      text-anchor="middle" font-family="Arial">ARDE STORE</text>
+                <text x="50%" y="54%" fill="#91a9bd" font-size="22"
+                      text-anchor="middle" font-family="Arial">PS4</text>
+            </svg>`
+        );
+}
+
+function crearTarjeta(juego){
+
+    const nombre = juego.nombre || "Juego sin nombre";
+
+    const imagen =
+        juego.imagen && juego.imagen.trim()
+            ? juego.imagen
+            : imagenFallback();
+
+    const video =
+        juego.trailer ||
+        juego.video ||
+        "https://www.youtube.com/results?search_query=" +
+        encodeURIComponent((juego.nombre || "") + " PS4 gameplay");
+
+    return `
+        <article class="game">
+            <img
+                class="cover"
+                src="${escapar(imagen)}"
+                alt="${escapar(nombre)}"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='${imagenFallback()}'">
+
+            <div class="game-body">
+                <h2 class="game-title">
+                    ${escapar(nombre)}
+                </h2>
+
+                <div class="buttons">
+                    <button
+                        class="button"
+                        type="button"
+                        onclick="abrirVideo('${escapar(video)}')">
+                        &#127916; GAMEPLAY
+                    </button>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function abrirVideo(url){
+    if(!url){
+        return;
+    }
+
+    window.open(url,"_blank","noopener,noreferrer");
+}
+
+function render(){
+
+    const total = filtrados.length;
+
+    const totalPaginas =
+        Math.max(1,Math.ceil(total / PAGE_SIZE));
+
+    if(paginaActual > totalPaginas){
+        paginaActual = totalPaginas;
+    }
+
+    if(total === 0){
+
+        counter.textContent =
+            "0 juegos encontrados.";
+
+        catalog.innerHTML =
+            `<div class="empty">
+                No se encontró ningún juego.
+            </div>`;
+
+        pagination.innerHTML = "";
+
+        return;
+    }
+
+    const inicio =
+        (paginaActual - 1) * PAGE_SIZE;
+
+    const fin =
+        inicio + PAGE_SIZE;
+
+    const pagina =
+        filtrados.slice(inicio,fin);
+
+    counter.textContent =
+        `${total} juegos encontrados • ` +
+        `Página ${paginaActual} de ${totalPaginas}`;
+
+    catalog.innerHTML =
+        `<div class="grid">
+            ${pagina.map(crearTarjeta).join("")}
+        </div>`;
+
+    renderPaginacion(totalPaginas);
+}
+
+function renderPaginacion(totalPaginas){
+
+    if(totalPaginas <= 1){
+        pagination.innerHTML = "";
+        return;
+    }
+
+    let html = "";
+
+    html += `
+        <button
+            class="page-button"
+            type="button"
+            onclick="irPagina(${paginaActual - 1})"
+            ${paginaActual === 1 ? "disabled" : ""}>
+            ←
+        </button>
+    `;
+
+    const maxBotones = 7;
+
+    let inicio = Math.max(
+        1,
+        paginaActual - Math.floor(maxBotones / 2)
+    );
+
+    let fin = Math.min(
+        totalPaginas,
+        inicio + maxBotones - 1
+    );
+
+    inicio = Math.max(
+        1,
+        fin - maxBotones + 1
+    );
+
+    for(let i=inicio;i<=fin;i++){
+
+        html += `
+            <button
+                class="page-button ${i === paginaActual ? "active" : ""}"
+                type="button"
+                onclick="irPagina(${i})">
+                ${i}
+            </button>
+        `;
+    }
+
+    html += `
+        <button
+            class="page-button"
+            type="button"
+            onclick="irPagina(${paginaActual + 1})"
+            ${paginaActual === totalPaginas ? "disabled" : ""}>
+            →
+        </button>
+    `;
+
+    pagination.innerHTML = html;
+}
+
+function irPagina(numero){
+
+    const totalPaginas =
+        Math.max(1,Math.ceil(filtrados.length / PAGE_SIZE));
+
+    if(numero < 1 || numero > totalPaginas){
+        return;
+    }
+
+    paginaActual = numero;
+
+    render();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function filtrar(){
+
+    const termino =
+        search.value.trim().toLowerCase();
+
+    if(!termino){
+
+        filtrados = [...juegos];
+
+    }else{
+
+        filtrados = juegos.filter(
+            juego =>
+                String(juego.nombre || "")
+                    .toLowerCase()
+                    .includes(termino)
+        );
+    }
+
+    filtrados.sort(
+        (a,b) =>
+            String(a.nombre || "")
+                .localeCompare(
+                    String(b.nombre || ""),
+                    "es",
+                    {sensitivity:"base"}
+                )
+    );
+
+    paginaActual = 1;
+
+    render();
+}
+
+async function cargarCatalogo(){
+
+    try{
+
+        const respuesta =
+            await fetch(JSON_URL,{
+                cache:"no-store"
+            });
+
+        if(!respuesta.ok){
+            throw new Error(
+                "HTTP " + respuesta.status
+            );
+        }
+
+        const datos =
+            await respuesta.json();
+
+        if(!Array.isArray(datos)){
+            throw new Error(
+                "juegos.json no contiene una lista."
+            );
+        }
+
+        juegos = datos;
+
+        filtrar();
+
+    }catch(error){
+
+        console.error(error);
+
+        counter.textContent =
+            "Error cargando el catálogo.";
+
+        catalog.innerHTML =
+            `<div class="error">
+                No se pudo cargar <strong>juegos.json</strong>.<br><br>
+                Comprueba que este archivo esté en la misma carpeta
+                que esta página.
+            </div>`;
+
+        pagination.innerHTML = "";
+    }
+}
+
+search.addEventListener(
+    "input",
+    filtrar
+);
+
+cargarCatalogo();
+</script>
+
+</body>
+</html>
