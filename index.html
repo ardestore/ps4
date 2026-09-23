@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -47,9 +47,215 @@
             document.getElementById('color-stylesheet').setAttribute('href', './includes/css/colors/' + savedColor + '.css');
         }
     </script>
+<style>
+    /* =====================================================
+       ARDE STORE - PANTALLA DE BIENVENIDA
+       CSS AISLADO DE WEBKITTY
+       ===================================================== */
+
+    #arde-welcome {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+
+        width: 100vw !important;
+        height: 100vh !important;
+
+        z-index: 999999 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+        padding: 20px !important;
+
+        box-sizing: border-box !important;
+
+        background: #050505 !important;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+            opacity 0.7s ease,
+            visibility 0.7s ease;
+    }
+
+    #arde-welcome.hide {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    #arde-welcome .arde-welcome-content {
+        width: 100% !important;
+        max-width: 1200px !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        box-sizing: border-box !important;
+    }
+
+    #arde-welcome .arde-banner {
+        display: block !important;
+
+        width: min(1100px, 92vw) !important;
+        max-width: min(1100px, 92vw) !important;
+
+        height: auto !important;
+        max-height: calc(100vh - 250px) !important;
+
+        margin: 0 auto 25px auto !important;
+        padding: 0 !important;
+
+        object-fit: contain !important; transform: scaleX(1.60) !important;
+
+        border-radius: 18px !important;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75) !important;
+    }
+
+    #arde-welcome .arde-title {
+        display: block !important;
+
+        width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        color: #ffffff !important;
+
+        font-size: clamp(32px, 5vw, 48px) !important;
+
+        font-weight: 800 !important;
+
+        letter-spacing: 3px !important;
+    }
+
+    #arde-welcome .arde-subtitle {
+        display: block !important;
+
+        width: 100% !important;
+
+        margin: 8px 0 30px 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        color: rgba(255,255,255,0.65) !important;
+
+        font-size: clamp(18px, 2.5vw, 24px) !important;
+
+        letter-spacing: 2px !important;
+    }
+
+    #arde-welcome #arde-continue {
+        display: block !important;
+
+        margin: 0 auto !important;
+
+        padding: 15px 55px !important;
+
+        border: none !important;
+        border-radius: 12px !important;
+
+        background: #2563eb !important;
+
+        color: #ffffff !important;
+
+        font-size: 20px !important;
+        font-weight: 700 !important;
+
+        cursor: pointer !important;
+
+        text-align: center !important;
+
+        box-shadow: 0 8px 30px rgba(37,99,235,0.4) !important;
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease !important;
+    }
+
+    #arde-welcome #arde-continue:hover {
+        background: #3b82f6 !important;
+        transform: scale(1.05) !important;
+    }
+
+    #arde-welcome #arde-continue:active {
+        transform: scale(0.97) !important;
+    }
+
+    /* Pantallas pequeÃ±as */
+    @media (max-width: 600px) {
+
+        #arde-welcome {
+            padding: 15px !important;
+        }
+
+        #arde-welcome .arde-banner {
+        display: block !important;
+
+        width: min(1100px, 92vw) !important;
+        max-width: min(1100px, 92vw) !important;
+
+        height: auto !important;
+        max-height: calc(100vh - 250px) !important;
+
+        margin: 0 auto 25px auto !important;
+        padding: 0 !important;
+
+        object-fit: contain !important; transform: scaleX(1.60) !important;
+
+        border-radius: 18px !important;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75) !important;
+    }
+</style>
 </head>
 
 <body class="bg-gray-900 text-white">
+<!-- ARDE STORE - Welcome Screen -->
+<div id="arde-welcome">
+
+    <div class="arde-welcome-content">
+
+        <img
+            class="arde-banner"
+            src="./arde-store.png"
+            alt="Arde Computer Store"
+        >
+
+        <h1 class="arde-title">
+            ARDE STORE
+        </h1>
+
+        <p class="arde-subtitle">
+            PS4 HOST
+        </p>
+
+        <button id="arde-continue" type="button">
+            CONTINUAR
+        </button>
+
+    </div>
+
+</div>
+    
+    
     <main class="mainContainer">
         <section id="initial-screen" class="relative flex flex-col items-center justify-center min-h-screen p-6 transition-opacity duration-700
             opacity-100">
@@ -567,17 +773,17 @@
                     <label class="flex items-center text-white/80">
                         <input type="radio" name="language" value="fa" class="ml-2"
                             onchange="saveLanguage(this.value);">
-                        <p>فارسی</p>
+                        <p>ÙØ§Ø±Ø³ÛŒ</p>
                     </label>
                     <label class="flex items-center text-white/80">
                         <input type="radio" name="language" value="ar" class="ml-2"
                             onchange="saveLanguage(this.value); ">
-                        <p>العربية</p>
+                        <p>Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</p>
                     </label>
                     <label class="flex items-center text-white/80">
                         <input type="radio" name="language" value="ru" class="ml-2"
                             onchange="saveLanguage(this.value); ">
-                        <p>Русский</p>
+                        <p>Ð ÑƒÑÑÐºÐ¸Ð¹</p>
                     </label>
                     <label class="flex items-center text-white/80">
                         <input type="radio" name="language" value="es" class="ml-2"
@@ -592,7 +798,7 @@
                     <label class="flex items-center text-white/80">
                         <input type="radio" name="language" value="zh-cn" class="ml-2"
                             onchange="saveLanguage(this.value);">
-                        <p>简体中文</p>
+                        <p>ç®€ä½“ä¸­æ–‡</p>
                     </label>
                 </div>
             </div>
@@ -642,13 +848,13 @@
                 <h3 class="text-l font-bold mb-4">Select a temperature</h3>
                 <div class="flex justify-around gap-2 text-sm text-white/70 w-full">
                     <button class="mt-6 hover:bg-blue-700 p-3 rounded font-semibold transition-colors" id="60"
-                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">60°C</button>
+                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">60Â°C</button>
                     <button class="mt-6 hover:bg-blue-700 p-3 rounded font-semibold transition-colors" id="70"
-                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">70°C</button>
+                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">70Â°C</button>
                     <button class="mt-6 hover:bg-blue-700 p-3 rounded font-semibold transition-colors" id="80"
-                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">80°C</button>
+                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">80Â°C</button>
                     <button class="mt-6 hover:bg-blue-700 p-3 rounded font-semibold transition-colors" id="85"
-                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">85°C</button>
+                        onclick="Loadpayloads('load_FanThreshold');sessionStorage.setItem('fanTemp', this.id);">85Â°C</button>
                 </div>
             </div>
 
@@ -732,6 +938,39 @@
     <script src="./includes/js/events.js"></script>
     <script src="./includes/js/payloadsHandler.js"></script>
     <script src="./includes/js/utilities.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const welcome = document.getElementById('arde-welcome');
+        const button = document.getElementById('arde-continue');
+
+        if (!welcome || !button) {
+            return;
+        }
+
+        button.addEventListener('click', function () {
+
+            welcome.classList.add('hide');
+
+            setTimeout(function () {
+                welcome.style.display = 'none';
+            }, 700);
+
+        });
+
+    });
+</script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
